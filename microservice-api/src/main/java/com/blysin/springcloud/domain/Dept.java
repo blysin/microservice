@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import javax.persistence.Id;
 import java.io.Serializable;
@@ -12,6 +13,7 @@ import java.io.Serializable;
 @Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
+@Accessors(chain = true)//chain为true才能实现set链式操作dept.setDb_name("db1").setDeptId(1).setDeptName("测试部门");
 public class Dept implements Serializable {
     @Id
     private Integer deptId;

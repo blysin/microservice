@@ -1,3 +1,24 @@
+### 基础概念
+
+#### 分模块基本思想
+
+​	传统代码分层，将代码分为controller，service，dao，util等不同包，而maven模块化的结构直接将不同层级的代码分为不同子项目，子项目相互引用构成了一个聚合的父项目。
+
+![模块结构](pic/模块结构.png)
+
+​	基础的第三方依赖，例如log4j等可以直接在parent中引入，然后子项目通过继承parent间接引入这些依赖。
+
+​	通常不包含静态资源的模块都直接打包成jar包，包含静态资源的例如web模块才打包成war包部署。
+
+![企业化的模块分层](pic/企业化的模块分层.png)
+
+
+
+#### Pom.xml说明
+
+父pom.xml
+
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -52,7 +73,10 @@
                 <artifactId>spring-boot-devtools</artifactId>
                 <scope>runtime</scope>
             </dependency>
-
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+            </dependency>
             <!--AOP-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -98,10 +122,6 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
     </dependencies>
 
@@ -154,3 +174,21 @@
 
 
 </project>
+```
+
+
+
+### 示例代码分层说明
+
+-   microservice-api：
+
+    核心基础模块，放置的是其他模块都会用到的公共类，例如最基础的domain：Dept.java
+
+-   microservice-provider-dept-8082：
+
+    服务提供者
+
+-   microservice-consumer-dept-8083：
+
+    服务消费者
+
