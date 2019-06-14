@@ -16,9 +16,11 @@ public class MicroserviceProviderDept8082ApplicationTests {
     private DeptDao deptDao;
     @Test
     public void contextLoads() {
-        System.out.println(JSON.toJSON(get(18)));;
+        System.out.println(JSON.toJSON(get(1)));;
     }
     public Dept get(int deptId){
         return deptDao.selectByPrimaryKey(deptId);
     }
+
+
 }

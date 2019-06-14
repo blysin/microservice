@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Mapper
 public interface DeptDao extends BaseMapper<Dept> {
+    void getByUnid(Integer unid);
 }
